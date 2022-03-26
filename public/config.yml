@@ -1,0 +1,85 @@
+# https://www.netlifycms.org/docs/backends-overview
+# backend:
+#   name: git-gateway
+#   branch: master
+
+backend:
+  name: github
+  repo: maolse/fhl-netlify-content
+  branch: main
+
+# https://www.netlifycms.org/docs/beta-features/#working-with-a-local-git-repository
+# local_backend: true
+
+# https://www.netlifycms.org/docs/azure-backend/
+# backend:
+#   name: azure
+#   repo: organization/project/repo # replace with actual path
+#   https://office.visualstudio.com/MAX/_git/m365-designer"
+#   repo: "office/MAX/m365-designer"
+#   tenant_id: tenantId # replace with your tenantId
+#   tenant_id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+#   app_id: appId # replace with your appId
+#   app_id: "997a2009-4997-4651-b80c-e6c6229599b4"
+
+# https://www.netlifycms.org/docs/configuration-options/#publish-mode
+publish_mode: editorial_workflow
+
+media_folder: "images/uploads" # Media files will be stored in the repo under images/uploads
+
+#media_folder: "static/images/uploads" # Media files will be stored in the repo under static/images/uploads
+#public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+# collections:
+#   - name: "blog" # Used in routes, e.g., /admin/collections/blog
+#     label: "Blog" # Used in the UI
+#     folder: "_posts/blog" # The path to the folder where the documents are stored
+#     create: true # Allow users to create new documents in this collection
+#     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+#     fields: # The fields for each document, usually in front matter
+#       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+#       - {label: "Title", name: "title", widget: "string"}
+#       - {label: "Publish Date", name: "date", widget: "datetime"}
+#       - {label: "Featured Image", name: "thumbnail", widget: "image"}
+#       - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
+#       - {label: "Body", name: "body", widget: "markdown"}
+
+collections:
+  - name: "article"
+    label: "Article"
+    folder: "_posts/article"
+    format: "json"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - label: "Author"
+        name: "author"
+        widget: "object"
+        fields:
+          - {label: "Name", name: "name", widget: "string"}
+          - {label: "Avatar", name: "avatar", widget: "string"}
+          - {label: "Profile URL", name: "profileUrl", widget: "string"}
+      - label: "Hero Image"
+        name: "heroImage"
+        widget: "object"
+        fields:
+          - {label: "URL", name: "url", widget: "string"}
+          - {label: "Alt Text", name: "altText", widget: "string"}
+          - {label: "Width (px)", name: "width", widget: "number"}
+          - {label: "Height (px)", name: "height", widget: "number"}
+      - label: "Article Contents"
+        name: "contents"
+        widget: "list"
+        fields:
+          - {label: "Paragraph", name: "paragraph", widget: "text"}
+          - label: "Image"
+            name: "Image"
+            widget: "object"
+            fields:
+            - {label: "URL", name: "url", widget: "image"}
+            - {label: "Alt Text", name: "altText", widget: "string"}
+            - {label: "Caption", name: "caption", widget: "string"}
+            - {label: "Width (px)", name: "width", widget: "number"}
+            - {label: "Height (px)", name: "height", widget: "number"}
+
